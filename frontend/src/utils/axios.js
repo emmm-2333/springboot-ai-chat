@@ -5,10 +5,16 @@ import { ElMessage } from 'element-plus';
 
 const instance = axios.create({
   baseURL: '/api',
-  timeout: 15000
+  timeout: 15000,
+  headers: {
+    'Content-Type': 'application/json'
+  }
 });
 
 instance.interceptors.request.use((config) => {
+  if (!config.headers['Content-Type']) {
+    config.headers['Content-Type'] = 'application/json';
+  }
   const store = useUserStore();
   if (store.token) {
     config.headers.Authorization = `Bearer ${store.token}`;

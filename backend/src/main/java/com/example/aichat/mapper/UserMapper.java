@@ -14,7 +14,7 @@ public interface UserMapper {
     @Select("SELECT * FROM user WHERE id = #{id}")
     User findById(Long id);
 
-    @Select("SELECT * FROM user ORDER BY id DESC LIMIT #{size} OFFSET #{offset}")
+    @Select("SELECT * FROM user ORDER BY id DESC LIMIT #{offset}, #{size}")
     List<User> findPage(@Param("offset") int offset, @Param("size") int size);
 
     @Select("SELECT COUNT(1) FROM user")

@@ -1,16 +1,16 @@
 package com.example.aichat.config;
 
 import com.example.aichat.filter.JwtAuthenticationFilter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Configuration
-@RequiredArgsConstructor
 public class FilterConfig {
 
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public FilterRegistrationBean<JwtAuthenticationFilter> jwtFilterRegistration() {

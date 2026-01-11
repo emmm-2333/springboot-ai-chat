@@ -1,0 +1,19 @@
+{
+  "folders": [
+    {
+      "path": "backend",
+      "name": "Backend"
+    },
+    {
+      "path": "frontend",
+      "name": "Frontend"
+    }
+  ],
+  "settings": {
+    "npm.enableScriptExplorer": true,
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "java.compile.nullAnalysis.mode": "automatic"
+  }
+}
