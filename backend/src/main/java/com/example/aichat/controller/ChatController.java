@@ -20,6 +20,7 @@ public class ChatController {
 
     private final ChatService chatService;
 
+
     @GetMapping("/conversations")
     public ApiResponse<List<Conversation>> listConversations(HttpServletRequest request) {
         Long userId = (Long) request.getAttribute("userId");
