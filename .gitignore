@@ -7,6 +7,9 @@ pom.xml.next
 release.properties
 dist/
 
+# 如果target目录下的文件已被跟踪，强制忽略所有.class文件
+**/*.class
+
 # Gradle
 .gradle/
 build/
