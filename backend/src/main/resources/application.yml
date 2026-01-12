@@ -13,6 +13,8 @@ spring:
   jackson:
     time-zone: Asia/Shanghai
 
+  config:
+    import: optional:configtree:./secrets/
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
@@ -20,8 +22,9 @@ mybatis:
 
 jwt:
   secret: change-this-secret-to-32-bytes-key-123
-  expiration-minutes: 120
+  expiration-minutes: 120000
 
 deepseek:
-  api-key: sk-6b66b9cb4c75443d8d9b97d4bcc456ab
+  # api-key 由 configtree 导入，文件路径：backend/secrets/deepseek/api-key
   base-url: https://api.deepseek.com
+

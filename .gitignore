@@ -68,6 +68,8 @@ coverage.lcov
 .env.test.local
 .env.production.local
 .env.staging.local
+# Local secrets (Spring configtree)
+backend/secrets/
 
 # Vue
 dist/
@@ -87,3 +89,8 @@ coverage/
 # Temporary folders
 tmp/
 temp/
+
+
+# 密钥
+我的key.md
+

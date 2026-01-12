@@ -16,8 +16,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public ApiResponse<?> list(@RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "10") int size) {
+    public ApiResponse<?> list(@RequestParam(name = "page", defaultValue = "1") int page,
+            @RequestParam(name = "size", defaultValue = "10") int size) {
         // 分页获取用户列表
         return ApiResponse.success(userService.list(page, size));
     }
