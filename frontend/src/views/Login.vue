@@ -1,17 +1,22 @@
 <template>
+  <!-- 登录页面布局 -->
   <div class="auth-page">
     <el-card class="auth-card">
       <h2 class="title">登录</h2>
       <el-form :model="form" :rules="rules" ref="formRef" label-position="top">
+        <!-- 用户名输入框 -->
         <el-form-item label="用户名" prop="username">
           <el-input v-model="form.username" autocomplete="username" />
         </el-form-item>
+        <!-- 密码输入框 -->
         <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" type="password" autocomplete="current-password" />
         </el-form-item>
+        <!-- 登录按钮 -->
         <el-form-item>
           <el-button type="primary" :loading="loading" @click="onSubmit" style="width:100%">登录</el-button>
         </el-form-item>
+        <!-- 注册链接 -->
         <el-link type="primary" @click="$router.push('/register')">没有账号？去注册</el-link>
       </el-form>
     </el-card>

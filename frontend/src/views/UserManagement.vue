@@ -1,5 +1,7 @@
 <template>
+  <!-- 用户管理页面布局 -->
   <el-container class="page">
+    <!-- 页面头部 -->
     <el-header class="header">
       <div>用户管理</div>
       <div>
@@ -7,8 +9,11 @@
         <el-button @click="goChat">返回对话</el-button>
       </div>
     </el-header>
+    <!-- 页面主体 -->
     <el-main>
+      <!-- 搜索框 -->
       <el-input v-model="search" placeholder="搜索用户名/昵称" clearable style="margin-bottom:12px" />
+      <!-- 用户表格 -->
       <el-table :data="filtered" stripe>
         <el-table-column prop="id" label="ID" width="80" />
         <el-table-column prop="username" label="用户名" />
@@ -26,6 +31,7 @@
           </template>
         </el-table-column>
       </el-table>
+      <!-- 分页组件 -->
       <div style="margin-top:12px; text-align:right;">
         <el-pagination
           layout="prev, pager, next"
@@ -38,6 +44,7 @@
     </el-main>
   </el-container>
 
+  <!-- 用户编辑/新增对话框 -->
   <el-dialog v-model="dialog.visible" :title="dialog.form.id ? '编辑用户' : '新增用户'" width="500px">
     <el-form :model="dialog.form" label-width="80px" :rules="rules" ref="formRef">
       <el-form-item label="用户名" prop="username">

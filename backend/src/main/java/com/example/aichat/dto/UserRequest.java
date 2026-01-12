@@ -5,20 +5,21 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
+@Data // 自动生成 getter、setter、toString 等方法
+@NoArgsConstructor // 自动生成无参构造函数
 public class UserRequest {
-    @NotBlank
-    private String username;
 
-    private String password;
+    @NotBlank // 验证字段不能为空
+    private String username; // 用户名
 
-    @Email
-    private String email;
+    private String password; // 用户密码
 
-    private String nickname;
+    @Email // 验证字段为合法邮箱
+    private String email; // 用户邮箱
 
-    private String avatar;
+    private String nickname; // 用户昵称
 
-    private Integer status;
+    private String avatar; // 用户头像 URL
+
+    private Integer status; // 用户状态（如启用或禁用）
 }

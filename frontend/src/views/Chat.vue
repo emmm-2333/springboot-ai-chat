@@ -1,5 +1,7 @@
 <template>
+  <!-- 聊天页面布局 -->
   <el-container class="chat-page">
+    <!-- 侧边栏：显示会话列表 -->
     <el-aside width="260px" class="sidebar">
       <div class="sidebar-header">
         <div class="logo">AI Chat</div>
@@ -13,6 +15,7 @@
         </el-menu>
       </el-scrollbar>
     </el-aside>
+    <!-- 主体内容：显示消息和输入框 -->
     <el-container>
       <el-header class="topbar">
         <div class="title">{{ activeConversationTitle }}</div>

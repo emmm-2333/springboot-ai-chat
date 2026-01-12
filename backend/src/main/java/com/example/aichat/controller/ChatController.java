@@ -13,37 +13,40 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api")
-@RequiredArgsConstructor
+@RestController // 标注为 REST 控制器
+@RequestMapping("/api") // 定义基础路径
+@RequiredArgsConstructor // 自动生成构造函数
 public class ChatController {
 
     private final ChatService chatService;
 
-
     @GetMapping("/conversations")
     public ApiResponse<List<Conversation>> listConversations(HttpServletRequest request) {
+        // 获取用户的所有会话列表
         Long userId = (Long) request.getAttribute("userId");
         return ApiResponse.success(chatService.listConversations(userId));
     }
 
     @PostMapping("/conversations")
     public ApiResponse<Conversation> createConversation(HttpServletRequest request,
-                                                        @Valid @RequestBody ConversationCreateRequest body) {
+            @Valid @RequestBody ConversationCreateRequest body) {
+        // 创建一个新的会话
         Long userId = (Long) request.getAttribute("userId");
         return ApiResponse.success(chatService.createConversation(userId, body));
     }
 
     @GetMapping("/conversations/{id}/messages")
     public ApiResponse<List<Message>> listMessages(HttpServletRequest request, @PathVariable("id") Long id) {
+        // 获取指定会话的所有消息
         Long userId = (Long) request.getAttribute("userId");
         return ApiResponse.success(chatService.listMessages(userId, id));
     }
 
     @PostMapping("/chat/{conversationId}")
     public ApiResponse<Message> sendMessage(HttpServletRequest request,
-                                            @PathVariable Long conversationId,
-                                            @Valid @RequestBody ChatMessageRequest body) {
+            @PathVariable Long conversationId,
+            @Valid @RequestBody ChatMessageRequest body) {
+        // 向指定会话发送消息
         Long userId = (Long) request.getAttribute("userId");
         return ApiResponse.success(chatService.sendMessage(userId, conversationId, body));
     }

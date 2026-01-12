@@ -16,16 +16,17 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 import java.util.Map;
 
-@Service
-@RequiredArgsConstructor
+@Service // 标注为 Spring 服务组件
+@RequiredArgsConstructor // 自动生成构造函数，注入依赖
 public class ChatServiceImpl implements ChatService {
 
-    private final ConversationMapper conversationMapper;
-    private final MessageMapper messageMapper;
-    private final WebClient deepSeekClient;
+    private final ConversationMapper conversationMapper; // 会话数据访问对象
+    private final MessageMapper messageMapper; // 消息数据访问对象
+    private final WebClient deepSeekClient; // WebClient，用于调用外部服务
 
     @Override
     public Conversation createConversation(Long userId, ConversationCreateRequest request) {
+        // 创建新会话
         Conversation conversation = new Conversation();
         conversation.setUserId(userId);
         conversation.setTitle(request.getTitle());
@@ -35,17 +36,20 @@ public class ChatServiceImpl implements ChatService {
 
     @Override
     public List<Conversation> listConversations(Long userId) {
+        // 获取用户的会话列表
         return conversationMapper.listByUser(userId);
     }
 
     @Override
     public List<Message> listMessages(Long userId, Long conversationId) {
+        // 获取指定会话的消息列表
         ensureConversationOwner(userId, conversationId);
         return messageMapper.listByConversation(conversationId);
     }
 
     @Override
     public Message sendMessage(Long userId, Long conversationId, ChatMessageRequest request) {
+        // 向指定会话发送消息
         ensureConversationOwner(userId, conversationId);
         Message userMsg = new Message();
         userMsg.setConversationId(conversationId);

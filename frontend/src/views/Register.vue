@@ -1,23 +1,30 @@
 <template>
+  <!-- 注册页面布局 -->
   <div class="auth-page">
     <el-card class="auth-card">
       <h2 class="title">注册</h2>
       <el-form :model="form" :rules="rules" ref="formRef" label-position="top">
+        <!-- 用户名输入框 -->
         <el-form-item label="用户名" prop="username">
           <el-input v-model="form.username" />
         </el-form-item>
+        <!-- 密码输入框 -->
         <el-form-item label="密码" prop="password">
           <el-input v-model="form.password" type="password" />
         </el-form-item>
+        <!-- 邮箱输入框 -->
         <el-form-item label="邮箱" prop="email">
           <el-input v-model="form.email" />
         </el-form-item>
+        <!-- 昵称输入框 -->
         <el-form-item label="昵称" prop="nickname">
           <el-input v-model="form.nickname" />
         </el-form-item>
+        <!-- 注册按钮 -->
         <el-form-item>
           <el-button type="primary" :loading="loading" @click="onSubmit" style="width:100%">注册</el-button>
         </el-form-item>
+        <!-- 登录链接 -->
         <el-link type="primary" @click="$router.push('/login')">已有账号？去登录</el-link>
       </el-form>
     </el-card>

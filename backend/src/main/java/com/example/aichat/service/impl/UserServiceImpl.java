@@ -17,16 +17,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
-@RequiredArgsConstructor
+@Service // 标注为 Spring 服务组件
+@RequiredArgsConstructor // 自动生成构造函数，注入依赖
 public class UserServiceImpl implements UserService {
 
-    private final UserMapper userMapper;
-    private final JwtUtil jwtUtil;
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final UserMapper userMapper; // 用户数据访问对象
+    private final JwtUtil jwtUtil; // JWT 工具类
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // 密码加密器
 
     @Override
     public Map<String, Object> login(AuthRequest request) {
+        // 用户登录逻辑
         User user = userMapper.findByUsername(request.getUsername());
         if (user == null || !passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new ApiException(401, "用户名或密码错误");
@@ -40,6 +41,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User register(RegisterRequest request) {
+        // 用户注册逻辑
         if (userMapper.findByUsername(request.getUsername()) != null) {
             throw new ApiException(400, "用户名已存在");
         }
@@ -55,6 +57,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Map<String, Object> list(int page, int size) {
+        // 分页查询用户列表
         int offset = Math.max(page - 1, 0) * size;
         List<User> users = userMapper.findPage(offset, size);
         long total = userMapper.count();
@@ -66,6 +69,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(UserRequest request) {
+        // 创建新用户
         if (userMapper.findByUsername(request.getUsername()) != null) {
             throw new ApiException(400, "用户名已存在");
         }
@@ -86,6 +90,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User update(Long id, UserRequest request) {
+        // 更新用户信息
         User exist = userMapper.findById(id);
         if (exist == null) {
             throw new ApiException(404, "用户不存在");
@@ -103,11 +108,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Long id) {
+        // 删除用户
         userMapper.delete(id);
     }
 
     @Override
     public User findById(Long id) {
+        // 根据 ID 查询用户
         return userMapper.findById(id);
     }
 }
