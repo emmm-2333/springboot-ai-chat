@@ -37,7 +37,10 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public List<Conversation> listConversations(Long userId) {
         // 获取用户的会话列表
-        return conversationMapper.listByUser(userId);
+        System.out.println("DEBUG: listConversations called with userId = " + userId);
+        List<Conversation> result = conversationMapper.listByUser(userId);
+        System.out.println("DEBUG: Found " + result.size() + " conversations for userId = " + userId);
+        return result;
     }
 
     @Override

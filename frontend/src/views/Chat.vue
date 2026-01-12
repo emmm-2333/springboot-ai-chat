@@ -73,20 +73,36 @@ const activeConversationTitle = computed(() => {
 });
 
 const loadConversations = async () => {
-  const res = await listConversations();
-  conversations.value = res.data;
-  if (!activeId.value && conversations.value.length) {
-    activeId.value = conversations.value[0].id;
-    await loadMessages();
+  try {
+    console.log('开始加载会话列表...');
+    const res = await listConversations();
+    console.log('会话列表响应:', res);
+    conversations.value = res.data;
+    console.log('会话数量:', conversations.value.length);
+    if (!activeId.value && conversations.value.length) {
+      activeId.value = conversations.value[0].id;
+      await loadMessages();
+    }
+  } catch (error) {
+    console.error('加载会话列表失败:', error);
+    ElMessage.error('加载会话列表失败');
   }
 };
 
 const loadMessages = async () => {
   if (!activeId.value) return;
-  const res = await listMessages(activeId.value);
-  messages.value = res.data;
-  await nextTick();
-  scrollToBottom();
+  try {
+    console.log('加载会话消息, conversationId:', activeId.value);
+    const res = await listMessages(activeId.value);
+    console.log('消息列表响应:', res);
+    messages.value = res.data;
+    console.log('消息数量:', messages.value.length);
+    await nextTick();
+    scrollToBottom();
+  } catch (error) {
+    console.error('加载消息失败:', error);
+    ElMessage.error('加载消息失败');
+  }
 };
 
 const newConversation = async () => {
